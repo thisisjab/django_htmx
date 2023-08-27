@@ -80,8 +80,12 @@ WSGI_APPLICATION = "project.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": env("PROJECT_POSTGRES_DB"),
+        "USER": env("PROJECT_POSTGRES_USER"),
+        "PASSWORD": env("PROJECT_POSTGRES_PASSWORD"),
+        "HOST": env("PROJECT_POSTGRES_HOST", default="db"),
+        "PORT": env("PROJECT_POSTGRES_PORT", default="5432"),
     }
 }
 

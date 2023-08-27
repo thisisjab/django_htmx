@@ -12,7 +12,11 @@ python = "^3.11.4"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^3.3.3"
+poethepoet = "^0.22.0"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poe.tasks]
+prepare = 'pre-commit install'

@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "todo-list-django"
+version = "0.0.0"
+description = "A simple todo list with django"
+authors = ["thisisjab <heythisisjab@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11.4"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

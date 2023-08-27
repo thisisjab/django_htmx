@@ -1,2 +1,3 @@
-# django_htmx
-A todo list project using django to get your hands dirty with htmx.
+# Todo List with Django
+
+This is a simple todo list I have built using django and htmx.

@@ -134,5 +134,15 @@ cython_debug/
 media
 static
 
-# README file
+# README & LICENCE files
 README.md
+LICENCE
+
+# project configuration and volumes
+docker-compose.yaml
+.editorconfig
+.gitignore
+.gitlint
+.isort.cfg
+.pre-commit-config.yaml
+.ruff.toml

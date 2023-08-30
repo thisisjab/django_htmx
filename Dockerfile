@@ -1,24 +1,27 @@
-FROM python:3.11.4-alpine as builder
-
-RUN pip install poetry==1.5.1
-
-ENV POETRY_NO_INTERACTION=1 \
-    POETRY_VIRTUALENVS_IN_PROJECT=1 \
-    POETRY_VIRTUALENVS_CREATE=1 \
-    POETRY_CACHE_DIR=/tmp/poetry_cache
+from python:3.11.4-alpine as base
 
 WORKDIR /app
 
-COPY pyproject.toml poetry.lock ./
-RUN touch README.md
+RUN apk add --no-cache curl gcc musl-dev libffi-dev openssl-dev build-base libpq-dev
 
-RUN --mount=type=cache,target=$POETRY_CACHE_DIR poetry install --without dev --no-root
+RUN pip install poetry==1.6.1
 
-FROM python:3.11.4-alpine as runtime
+COPY pyproject.toml poetry.lock /app
 
-ENV VIRTUAL_ENV=/app/.venv \
-    PATH="/app/.venv/bin:$PATH"
+RUN poetry export -f requirements.txt --output requirements.txt
 
-COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
+RUN pip install -r requirements.txt
 
-COPY manage.py project/ .
+FROM python:3.11.4-alpine
+
+RUN apk add libpq
+
+COPY --from=base /usr/local/lib/python3.11/site-packages/ /usr/local/lib/python3.11/site-packages/
+
+COPY --from=base /usr/local/bin/ /usr/local/bin/
+
+COPY . /app
+
+WORKDIR /app
+
+ENV PYTHONUNBUFFERED 1

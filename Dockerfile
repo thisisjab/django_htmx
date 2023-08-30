@@ -1,8 +1,6 @@
-from python:3.11.4-alpine as base
+from python:3.11.4-slim as base
 
 WORKDIR /app
-
-RUN apk add --no-cache curl gcc musl-dev libffi-dev openssl-dev build-base libpq-dev
 
 RUN pip install poetry==1.6.1
 
@@ -12,9 +10,7 @@ RUN poetry export -f requirements.txt --output requirements.txt
 
 RUN pip install -r requirements.txt
 
-FROM python:3.11.4-alpine
-
-RUN apk add libpq
+FROM python:3.11.4-slim
 
 COPY --from=base /usr/local/lib/python3.11/site-packages/ /usr/local/lib/python3.11/site-packages/
 

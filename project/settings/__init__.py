@@ -35,6 +35,10 @@ ALLOWED_HOSTS = env.list("PROJECT_ALLOWED_HOSTS", default=[])
 
 # Application definition
 
+DEBUGGING_APPS = [
+    "debug_toolbar",
+]
+
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -45,6 +49,10 @@ INSTALLED_APPS = [
     "project.authentication",
 ]
 
+
+if DEBUG:
+    INSTALLED_APPS += DEBUGGING_APPS
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -54,6 +62,34 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+if DEBUG:
+    # include the Debug Toolbar middleware as early as possible in the list.
+    # However, it must come after any other middleware that encodes the
+    # response`s content, such as GZipMiddleware
+    MIDDLEWARE.insert(0, "debug_toolbar.middleware.DebugToolbarMiddleware")
+
+# This is required by django-debug-toolbar because with every requests it only
+# shows the toolbar if the request is coming from an internal ip in order to
+# prevent security issues like SQL injection
+DEFAULT_INTERNAL_IPS = ["127.0.0.1"]
+
+if DEBUG:
+    import socket
+
+    # WARN: do not use `_` as variable name because it will be confused with gettext_lazy.
+    hostname, __, ips = socket.gethostbyname_ex(socket.gethostname())
+    DEFAULT_INTERNAL_IPS.extend(
+        [ip[: ip.rfind(".")] + ".1" for ip in ips] + ["10.0.2.2"]
+    )
+
+EXTRA_INTERNAL_IPS = env.list(
+    var="PROJECT_EXTRA_INTERNAL_IPS", cast=str, default=list()
+)
+INTERNAL_IPS = (
+    env.list(var="PROJECT_INTERNAL_IPS", cast=str, default=DEFAULT_INTERNAL_IPS)
+    + EXTRA_INTERNAL_IPS
+)
 
 ROOT_URLCONF = "project.urls"
 

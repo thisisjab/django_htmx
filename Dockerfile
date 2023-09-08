@@ -6,7 +6,21 @@ RUN pip install poetry==1.6.1
 
 COPY pyproject.toml poetry.lock /app
 
-RUN poetry export -f requirements.txt --output requirements.txt
+# Read args from .env file
+ARG IS_DEBUG
+# ENV PROJECT_DEBUG=$PROJECT_DEBUG
+
+# RUN if [ "$PROJECT_DEBUG" = "true" ]; then \
+#         poetry export --with dev -f requirements.txt --output requirements.txt; \
+#     else \
+#         poetry export -f requirements.txt --output requirements.txt; \
+#     fi
+
+RUN if [ "$IS_DEBUG" = "true" ] ; then \
+        poetry export --with dev -f requirements.txt --output requirements.txt; \
+    else \
+        poetry export -f requirements.txt --output requirements.txt; \
+    fi
 
 RUN pip install -r requirements.txt
 

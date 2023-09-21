@@ -39,6 +39,10 @@ DEBUGGING_APPS = [
     "debug_toolbar",
 ]
 
+THIRD_PARTY_APPS = [
+    "widget_tweaks",
+]
+
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -47,7 +51,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "project.authentication",
-]
+] + THIRD_PARTY_APPS
 
 
 if DEBUG:

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock title %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-12 my-5">
+            {% include "form_renderer.html" with form=form submit_button_text="Login" %}
+        </div>
+        <div class="col-12">
+            Forgot your password? <a href="#">Reset your password.</a>
+        </div>
+        <div class="col-12">
+            New here? <a href="#">Sign up</a> now.
+        </div>
+    </div>
+</div>
+{% endblock body %}

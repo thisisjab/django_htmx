@@ -43,15 +43,23 @@ THIRD_PARTY_APPS = [
     "widget_tweaks",
 ]
 
-INSTALLED_APPS = [
-    "django.contrib.admin",
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.sessions",
-    "django.contrib.messages",
-    "django.contrib.staticfiles",
+LOCAL_APPS = [
     "project.authentication",
-] + THIRD_PARTY_APPS
+    "project.todos",
+]
+
+INSTALLED_APPS = (
+    [
+        "django.contrib.admin",
+        "django.contrib.auth",
+        "django.contrib.contenttypes",
+        "django.contrib.sessions",
+        "django.contrib.messages",
+        "django.contrib.staticfiles",
+    ]
+    + THIRD_PARTY_APPS
+    + LOCAL_APPS
+)
 
 
 if DEBUG:

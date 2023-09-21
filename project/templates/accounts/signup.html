@@ -29,7 +29,7 @@
           {% endif %}
 
           <div class="mb-3">
-            <div id="email-err" class="alert alert-warning" role="alert">Please fill out this form.</div>
+            <div id="email-err"></div>
             {% render_field form.email|append_attr:"placeholder:Email" class='form-control' hx-post='/account/check-email/' hx-target='#email-err' hx-trigger='keyup delay:2s' %}
           </div>
           <div class="mb-3">

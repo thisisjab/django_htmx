@@ -148,6 +148,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Authentication
 AUTH_USER_MODEL = "authentication.User"
 LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
 
 
 # Internationalization

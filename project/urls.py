@@ -5,6 +5,6 @@ from project.authentication.urls import urlpatterns as authentication_urls
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("account/", include(authentication_urls)),
+    path("account/", include((authentication_urls, "auth"), namespace="auth")),
     path("__debug__/", include("debug_toolbar.urls")),
 ]

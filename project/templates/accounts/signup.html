@@ -1,14 +1,48 @@
-{% extends "base.html" %}
-{% block title %}Sign Up{% endblock title %}
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}
+  Sign Up
+{% endblock %}
 {% block body %}
-<div class="container">
+  <div class="container">
     <div class="row">
-        <div class="col-12 my-5">
-            {% include "form_renderer.html" with form=form submit_button_text="Sign Up" %}
-        </div>
-        <div class="col-12">
-            You have an account? <a href="#">Login</a> now.
-        </div>
+      <div class="col-12 my-5">
+        <form method="POST">
+          {% csrf_token %}
+
+          {% if form.non_field_errors %}
+            {% for error in form.non_field_errors %}
+              <div class="alert alert-danger mb-5" role="alert">{{ error }}</div>
+            {% endfor %}
+          {% elif form.errors %}
+            <div class="alert alert-danger mb-5" role="alert">
+              Please fix errors below to continue:<br /><br />
+              {% for field, errors in form.errors.items %}
+                <b>{{ field }}</b>:<ul>
+                  {% for error in errors %}
+                    <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+              {% endfor %}
+            </div>
+          {% endif %}
+
+          <div class="mb-3">
+            {% render_field form.email|append_attr:"placeholder:Email" class='form-control' %}
+          </div>
+          <div class="mb-3">
+            {% render_field form.password1|append_attr:"placeholder:Password" class='form-control' %}
+          </div>
+          <div class="mb-3">
+            {% render_field form.password2|append_attr:"placeholder:Password Repeat" class='form-control' %}
+          </div>
+          <input type="submit" class="btn btn-success" value="Sign Up" />
+        </form>
+      </div>
+      <div class="col-12">
+        You have an account? <a href="#">Login</a> now.
+      </div>
     </div>
-</div>
-{% endblock body %}
+  </div>
+{% endblock %}

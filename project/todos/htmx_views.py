@@ -1,9 +1,13 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.utils.timezone import datetime
+from django.views.decorators.http import require_http_methods
 
 from project.todos.models import Todo
 
 
+@login_required
+@require_http_methods(["POST"])
 def add_todo(request):
     user = request.user
     todo_title = request.POST.get("todo_title")
@@ -27,6 +31,8 @@ def add_todo(request):
     )
 
 
+@login_required
+@require_http_methods(["DELETE"])
 def delete_todo(request, pk):
     user = request.user
     todo_to_delete = Todo.objects.get(user=user, pk=pk)
@@ -42,6 +48,8 @@ def delete_todo(request, pk):
     )
 
 
+@login_required
+@require_http_methods(["POST"])
 def search_todo(request):
     user = request.user
     search_value = request.POST.get("search_value")

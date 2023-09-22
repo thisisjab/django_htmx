@@ -5,44 +5,30 @@
 {% block body %}
   <div class="container">
     <div class="row my-5">
-      <div class="col-12">
-        <table class="table w-100">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Title</th>
-              <th scope="col">State</th>
-              <th scope="col">Due</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for todo in user_todos %}
-              <tr>
-                <th scope="row">{{ forloop.counter }}</th>
-                <td>{{ todo.title }}</td>
-                <td>
-                  <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{ todo.get_state_display }}</button>
-                    <ul class="dropdown-menu">
-                      {% for available_state in todo.State.choices %}
-                      <li>
-                        <a class="dropdown-item" href="#">{{available_state.1}}</a>
-                      </li>
-                      {% endfor %}
-                    </ul>
-                  </div>
-                </td>
-                <td>
-                  {% if todo.due %}
-                    {{ todo.due }}
-                  {% else %}
-                    No due
-                  {% endif %}
-                </td>
-              </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+      <div class="col-12 mb-5">
+        <form action="post"  hx-post="{% url 'todo:add' %}" hx-target="#todoList">
+          {% csrf_token %}
+          <div class="row g-2">
+            <div class="col-lg-8">
+              <div class="form-floating">
+                <input name="todo_title" type="text" class="form-control" id="todoTitle" placeholder="Bake cake for Jane's birthday" value="" />
+                <label for="todoTitle">Add Todo</label>
+              </div>
+            </div>
+            <div class="col-lg-2">
+              <div class="form-floating">
+                <input name="todo_due" type="date" class="form-control" id="todoDue" />
+                <label for="todoDue">Due</label>
+              </div>
+            </div>
+            <div class="col-lg-2">
+              <input type="submit" class="btn btn-success w-100 h-100" value="Add" />
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-12" id="todoList">
+        {% include "todos/partial/list.html" with user_todos=user_todos %}
       </div>
     </div>
   </div>

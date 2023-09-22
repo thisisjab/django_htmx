@@ -56,5 +56,19 @@
     {% endblock %}
     <script src="{% static 'js/bootstrap.js' %}"></script>
     <script src="{% static 'js/htmx.js' %}"></script>
+    <script src="{% static 'js/sortable.js' %}"></script>
+    <script>
+      htmx.onLoad(function(content) {
+        var sortables = content.querySelectorAll(".sortable");
+        for (var i = 0; i < sortables.length; i++) {
+          var sortable = sortables[i];
+          new Sortable(sortable, {
+              animation: 150,
+              ghostClass: 'blue-background-class'
+          });
+        }
+      })
+    </script>
+
   </body>
 </html>

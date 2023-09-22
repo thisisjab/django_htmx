@@ -43,3 +43,14 @@ class Todo(models.Model):
 
     def __str__(self):
         return self.title
+
+    def delete(self, *args, **kwargs):
+        # Get all todos with the same user and order greater than the current todo
+        todos_to_update = Todo.objects.filter(user=self.user, order__gt=self.order)
+
+        # Decrease the order of each todo by 1
+        for todo in todos_to_update:
+            todo.order -= 1
+            todo.save()
+
+        super().delete(*args, **kwargs)

@@ -7,6 +7,7 @@ app_name = "todo"
 htmx_urlpatterns = [
     path("add/", htmx_views.add_todo, name="add"),
     path("delete/<int:pk>/", htmx_views.delete_todo, name="delete"),
+    path("search/", htmx_views.search_todo, name="search"),
 ]
 
 urlpatterns = [

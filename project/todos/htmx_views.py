@@ -40,3 +40,18 @@ def delete_todo(request, pk):
         "todos/partial/list.html",
         context={"user_todos": user_todos},
     )
+
+
+def search_todo(request):
+    user = request.user
+    search_value = request.POST.get("search_value")
+    found_todos = Todo.objects.filter(
+        user=user,
+        title__icontains=search_value,
+    ).order_by("order")
+
+    return render(
+        request,
+        "todos/partial/list.html",
+        context={"user_todos": found_todos},
+    )

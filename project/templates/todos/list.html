@@ -27,6 +27,15 @@
           </div>
         </form>
       </div>
+      <hr>
+      <div class="col-12 mb-3">
+        <form method="post">
+          <div class="input-group mb-1">
+            <input hx-trigger="keyup delay:1s" hx-post="{% url "todo:search"  %}" hx-target="#todoList"  name="search_value" type="text" class="form-control" placeholder="Search..." aria-label="Search..." aria-describedby="btnSearch">
+          </div>
+        </form>
+      </div>
+      <hr>
       <div class="col-12" id="todoList">
         {% include "todos/partial/list.html" with user_todos=user_todos %}
       </div>

@@ -6,7 +6,7 @@
   <div class="container">
     <div class="row my-5">
       <div class="col-12 mb-5">
-        <form action="post"  hx-post="{% url 'todo:add' %}" hx-target="#todoList">
+        <form action="post" hx-on::after-request="this.reset()" hx-post="{% url 'todo:add' %}" hx-target="#todoList">
           {% csrf_token %}
           <div class="row g-2">
             <div class="col-lg-8">

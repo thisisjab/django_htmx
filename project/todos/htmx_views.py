@@ -24,3 +24,18 @@ def add_todo(request):
         "todos/partial/list.html",
         context={"user_todos": user_todos},
     )
+
+
+def delete_todo(request, pk):
+    user = request.user
+    todo_to_delete = Todo.objects.get(user=user, pk=pk)
+
+    todo_to_delete.delete()
+
+    user_todos = Todo.objects.filter(user=user).order_by("order")
+
+    return render(
+        request,
+        "todos/partial/list.html",
+        context={"user_todos": user_todos},
+    )

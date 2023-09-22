@@ -5,6 +5,7 @@
         <th scope="col">Title</th>
         <th scope="col">State</th>
         <th scope="col">Due</th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
@@ -31,6 +32,7 @@
               No due
             {% endif %}
           </td>
+          <td><span class="badge rounded-pill text-bg-danger" style="cursor: pointer;" hx-delete="{% url 'todo:delete' todo.pk %}" hx-target="#todoList">X</span></td>
         </tr>
       {% endfor %}
     </tbody>

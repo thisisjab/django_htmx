@@ -1,4 +1,5 @@
-<table class="table w-100">
+{% if user_todos %}
+  <table class="table w-100">
     <thead>
       <tr>
         <th scope="col">#</th>
@@ -32,8 +33,13 @@
               No due
             {% endif %}
           </td>
-          <td><span class="badge rounded-pill text-bg-danger" style="cursor: pointer;" hx-delete="{% url 'todo:delete' todo.pk %}" hx-target="#todoList">X</span></td>
+          <td>
+            <span class="badge rounded-pill text-bg-danger" style="cursor: pointer;" hx-delete="{% url 'todo:delete' todo.pk %}" hx-target="#todoList">X</span>
+          </td>
         </tr>
       {% endfor %}
     </tbody>
   </table>
+{% else %}
+  <p>You got no todos.</p>
+{% endif %}

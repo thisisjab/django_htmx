@@ -8,11 +8,12 @@ def add_todo(request):
     user = request.user
     todo_title = request.POST.get("todo_title")
     todo_due = request.POST.get("todo_due")
+    user_last_todo = Todo.objects.filter(user=user).last()
     todo = Todo(
         user=user,
         title=todo_title,
         due=None if todo_due == "" else datetime.fromisoformat(todo_due),
-        order=Todo.objects.filter(user=user).last().order + 1 or 1,
+        order=1 if user_last_todo is None else user_last_todo.order + 1,
     )
 
     todo.save()

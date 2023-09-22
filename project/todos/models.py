@@ -26,7 +26,7 @@ class Todo(models.Model):
         choices=State.choices,
         default=State.PENDING,
     )
-    due = models.DateTimeField(blank=True, null=True, verbose_name=_("Due"))
+    due = models.DateField(blank=True, null=True, verbose_name=_("Due"))
     modification_time = models.DateTimeField(
         verbose_name=_("Modification Time"),
         auto_now=True,

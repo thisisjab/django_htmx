@@ -4,27 +4,17 @@ from django.utils.translation import gettext_lazy as _
 
 
 class Todo(models.Model):
-    class State(models.TextChoices):
-        DONE = "D", "Done"
-        FINISHED = "F", "Finished"
-        IN_PROGRESS = "I", "In Progress"
-        PENDING = (
-            "P",
-            "Pending",
-        )
-        OVERDUE = "O", "Overdue"
-
     title = models.CharField(
         max_length=255,
         verbose_name=_("Title"),
         blank=False,
         null=False,
     )
-    state = models.CharField(
-        _("State"),
-        max_length=2,
-        choices=State.choices,
-        default=State.PENDING,
+    is_done = models.BooleanField(
+        blank=False,
+        null=False,
+        default=False,
+        verbose_name=_("Is Done"),
     )
     due = models.DateField(blank=True, null=True, verbose_name=_("Due"))
     modification_time = models.DateTimeField(

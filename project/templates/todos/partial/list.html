@@ -3,13 +3,13 @@
     {% for todo in user_todos %}
       <li class="card d-flex flex-row align-items-center justify-content-between px-3 py-3 mb-3">
         {% if todo.is_done %}
-          <input class="form-check-input" type="checkbox" name="is_done" id="" checked />
+          <input class="form-check-input" type="checkbox" name="is_done" id="" hx-get="{% url 'todo:toggle_is_done' todo.pk %}" hx-target="#todoList" checked />
           <p class="my-0 mx-3 text-body-tertiary">#{{ forloop.counter }}</p>
           <p class="my-0 text-decoration-line-through text-body-tertiary w-100" style="margin-right: 1rem;">{{ todo.title }}</p>
           <div class="vr"></div>
           <span class="badge rounded-pill text-bg-danger" style="cursor: pointer; margin-left: 1rem" hx-delete="{% url 'todo:delete' todo.pk %}" hx-target="#todoList">X</span>
         {% else %}
-          <input class="form-check-input" type="checkbox" name="is_done" id="" />
+          <input class="form-check-input" type="checkbox" name="is_done" id="" hx-get="{% url 'todo:toggle_is_done' todo.pk %}" hx-target="#todoList" />
           <p class="my-0 mx-3">#{{ forloop.counter }}</p>
           <p class="my-0 w-100" style="margin-right: 1rem;">
             {{ todo.title }}

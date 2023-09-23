@@ -63,3 +63,22 @@ def search_todo(request):
         "todos/partial/list.html",
         context={"user_todos": found_todos},
     )
+
+
+@login_required
+@require_http_methods(["GET"])
+def toggle_todo_is_done(request, pk):
+    user = request.user
+    todo = Todo.objects.get(user=user, pk=pk)
+
+    todo.is_done = not todo.is_done
+
+    todo.save()
+
+    user_todos = Todo.objects.filter(user=user).order_by("is_done", "order")
+
+    return render(
+        request,
+        "todos/partial/list.html",
+        context={"user_todos": user_todos},
+    )

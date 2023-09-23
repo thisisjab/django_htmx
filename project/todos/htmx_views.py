@@ -82,3 +82,29 @@ def toggle_todo_is_done(request, pk):
         "todos/partial/list.html",
         context={"user_todos": user_todos},
     )
+
+
+@login_required
+@require_http_methods(["POST"])
+def sort_todos(request):
+    user = request.user
+    user_todos = user_todos = Todo.objects.filter(user=user).order_by(
+        "order",
+        "is_done",
+    )
+    todo_orders = request.POST.getlist("todo_orders")
+    for index, pk in enumerate(todo_orders, start=1):
+        todo = Todo.objects.get(pk=pk)
+        todo.order = index
+        todo.save()
+
+    user_todos = user_todos = Todo.objects.filter(user=user).order_by(
+        "order",
+        "is_done",
+    )
+
+    return render(
+        request,
+        "todos/partial/list.html",
+        context={"user_todos": user_todos},
+    )

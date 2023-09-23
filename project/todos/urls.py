@@ -13,6 +13,7 @@ htmx_urlpatterns = [
         htmx_views.toggle_todo_is_done,
         name="toggle_is_done",
     ),
+    path("sort/", htmx_views.sort_todos, name="sort"),
 ]
 
 urlpatterns = [

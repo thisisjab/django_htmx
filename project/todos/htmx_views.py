@@ -22,7 +22,7 @@ def add_todo(request):
 
     todo.save()
 
-    user_todos = Todo.objects.filter(user=user).order_by("is_done", "order")
+    user_todos = Todo.objects.filter(user=user).order_by("order", "is_done")
 
     return render(
         request,
@@ -39,7 +39,7 @@ def delete_todo(request, pk):
 
     todo_to_delete.delete()
 
-    user_todos = Todo.objects.filter(user=user).order_by("is_done", "order")
+    user_todos = Todo.objects.filter(user=user).order_by("order", "is_done")
 
     return render(
         request,
@@ -56,7 +56,7 @@ def search_todo(request):
     found_todos = Todo.objects.filter(
         user=user,
         title__icontains=search_value,
-    ).order_by("is_done", "order")
+    ).order_by("order", "is_done")
 
     return render(
         request,
@@ -75,7 +75,7 @@ def toggle_todo_is_done(request, pk):
 
     todo.save()
 
-    user_todos = Todo.objects.filter(user=user).order_by("is_done", "order")
+    user_todos = Todo.objects.filter(user=user).order_by("order", "is_done")
 
     return render(
         request,

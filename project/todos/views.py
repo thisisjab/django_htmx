@@ -9,5 +9,8 @@ class TodoListView(LoginRequiredMixin, generic.TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["user_todos"] = Todo.objects.filter(user=self.request.user)
+        context["user_todos"] = Todo.objects.filter(user=self.request.user).order_by(
+            "is_done",
+            "order",
+        )
         return context

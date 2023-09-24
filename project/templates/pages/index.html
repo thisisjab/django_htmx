@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Todo List{% endblock title %}
+{% block navbar %}{% endblock navbar %}
+{% block body %}
+<header class="bg-primary text-white text-center py-5">
+    <h1 class="display-4">Welcome to Todo List</h1>
+    <p class="lead">The simple and efficient way to manage your tasks!</p>
+</header>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">Get Started</h2>
+                    <p class="card-text">Start organizing your tasks and stay on top of your to-do list.</p>
+                    {% if user.is_authenticated %}
+                    <a href="{% url "todo:list" %}" class="btn btn-primary">Go to todo list</a>
+                    {% else %}
+                    <a href="{% url "auth:login" %}" class="btn btn-primary">Login</a>
+                    <span class="mx-2">or</span>
+                    <a href="{% url "auth:signup" %}" class="btn btn-primary">Sign up</a>
+
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 offset-md-3 my-2">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-text">More information about this project on <a href="https://github.com/thisisjab/todo_list_django">github.</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}

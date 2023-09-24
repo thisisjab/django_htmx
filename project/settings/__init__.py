@@ -46,6 +46,7 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     "project.authentication",
     "project.todos",
+    "project.pages",
 ]
 
 INSTALLED_APPS = (

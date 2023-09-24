@@ -1,3 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Roboto+Serif:ital,opsz,wght@0,8..144,400;0,8..144,700;1,8..144,400;1,8..144,700&family=Roboto:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
 .form-control-no-focus:focus {
     outline: none;
+}
+
+.font-merriweather {
+    font-family: 'Merriweather', serif !important;
+}
+
+.font-roboto {
+    font-family: 'Roboto', serif !important;
+}
+
+.font-roboto-serif {
+    font-family: 'Roboto Serif', serif !important;
+}
+
+.font-bold {
+    font-weight: bold !important;
+}
+
+.font-light {
+    font-weight: lighter !important;
 }

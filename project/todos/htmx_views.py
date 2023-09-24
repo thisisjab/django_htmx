@@ -75,12 +75,10 @@ def toggle_todo_is_done(request, pk):
 
     todo.save()
 
-    user_todos = Todo.objects.filter(user=user).order_by("order", "is_done")
-
     return render(
         request,
-        "todos/partial/list.html",
-        context={"user_todos": user_todos},
+        "todos/partial/todo_item.html",
+        context={"todo": todo},
     )
 
 

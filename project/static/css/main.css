@@ -16,10 +16,10 @@
     font-family: 'Roboto Serif', serif !important;
 }
 
-.font-bold {
-    font-weight: bold !important;
+body {
+    font-family: 'Roboto', serif;
 }
 
-.font-light {
-    font-weight: lighter !important;
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Merriweather';
 }

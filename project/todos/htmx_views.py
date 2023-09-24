@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.http.response import HttpResponseBadRequest
 from django.shortcuts import render
 from django.utils.timezone import datetime
 from django.views.decorators.http import require_http_methods
@@ -11,6 +12,12 @@ from project.todos.models import Todo
 def add_todo(request):
     user = request.user
     todo_title = request.POST.get("todo_title")
+
+    if todo_title is None or todo_title.strip() == "":
+        return HttpResponseBadRequest(
+            "Error: Todo with no title. Please add something.",
+        )
+
     todo_due = request.POST.get("todo_due")
     user_last_todo = Todo.objects.filter(user=user).last()
     todo = Todo(

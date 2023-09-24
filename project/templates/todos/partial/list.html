@@ -1,5 +1,5 @@
 {% if user_todos %}
-  <form class="sortable list-group" hx-trigger="end" hx-post="{% url 'todo:sort' %}" hx-target="#todoList">
+  <form autocomplete="off" class="sortable list-group" hx-trigger="end" hx-post="{% url 'todo:sort' %}" hx-target="#todoList">
     {% for todo in user_todos %}
       {% include "todos/partial/todo_item.html" with todo=todo %}
     {% endfor %}

@@ -1,0 +1,3 @@
+.form-control-no-focus:focus {
+    outline: none;
+}

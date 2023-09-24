@@ -113,3 +113,25 @@ def sort_todos(request):
         "todos/partial/list.html",
         context={"user_todos": user_todos},
     )
+
+
+@login_required
+@require_http_methods(["POST"])
+def edit_todo_title(request, pk):
+    todo_title = request.POST.get("todo_title")
+    if todo_title is None or todo_title.strip() == "":
+        return HttpResponseBadRequest(
+            "Error: Todo with no title. Please add something.",
+        )
+
+    todo = Todo.objects.get(pk=pk)
+    todo.title = todo_title
+    todo.save()
+
+    todo.save()
+
+    return render(
+        request,
+        "todos/partial/todo_item.html",
+        context={"todo": todo},
+    )

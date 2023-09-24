@@ -2,20 +2,19 @@
   <input type="hidden" name="todo_orders" value="{{ todo.pk }}" />
   <li class="card d-flex flex-row align-items-center justify-content-between px-3 py-3 mb-3">
     {% if todo.is_done %}
-      <input autocomplete="off" class="form-check-input" type="checkbox" name="is_done" id="" hx-get="{% url 'todo:toggle_is_done' todo.pk %}" hx-target="#todo_item_{{ todo.pk }}" checked />
+      <input class="form-check-input" type="checkbox" name="is_done" id="" hx-get="{% url 'todo:toggle_is_done' todo.pk %}" hx-target="#todo_item_{{ todo.pk }}" checked />
       <p class="my-0 mx-3 text-body-tertiary">#{{ todo.order }}</p>
-      <p class="my-0 text-decoration-line-through text-body-tertiary w-100" style="margin-right: 1rem;">{{ todo.title }}</p>
+      <input type="text" class="form-control-no-focus my-0 text-decoration-line-through text-body-tertiary w-100 border-0" style="margin-right: 1rem;" value="{{ todo.title }}">
       <div class="vr"></div>
       <span class="badge rounded-pill text-bg-danger" style="cursor: pointer; margin-left: 1rem" hx-delete="{% url 'todo:delete' todo.pk %}" hx-target="#todoList">X</span>
     {% else %}
-      <input autocomplete="off" class="form-check-input" type="checkbox" name="is_done" id="" hx-get="{% url 'todo:toggle_is_done' todo.pk %}" hx-target="#todo_item_{{ todo.pk }}" />
+      <input class="form-check-input" type="checkbox" name="is_done" id="" hx-get="{% url 'todo:toggle_is_done' todo.pk %}" hx-target="#todo_item_{{ todo.pk }}" />
       <p class="my-0 mx-3">#{{ todo.order }}</p>
-      <p class="my-0 w-100" style="margin-right: 1rem;">
-        {{ todo.title }}
+
+        <input id="todo_{{todo.pk}}_text" name="todo_title" class="form-control-no-focus my-0 w-100 border-0" style="margin-right: 1rem;" value="{{ todo.title }}" hx-post="{% url "todo:edit-title" todo.pk %}" hx-target="#todo_{{todo.pk}}_text" hx-target-400="" hx-trigger="keyup delay:1s">
         {% if todo.due %}
           <span class="badge text-bg-success font-monospace" style="margin-left: 1rem;">Due: {{ todo.due|date:'c' }}</span>
         {% endif %}
-      </p>
       <div class="vr"></div>
       <span class="badge rounded-pill text-bg-danger" style="cursor: pointer; margin-left: 1rem;" hx-delete="{% url 'todo:delete' todo.pk %}" hx-target="#todoList">X</span>
     {% endif %}

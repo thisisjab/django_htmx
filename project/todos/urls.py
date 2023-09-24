@@ -14,6 +14,7 @@ htmx_urlpatterns = [
         name="toggle_is_done",
     ),
     path("sort/", htmx_views.sort_todos, name="sort"),
+    path("edit_title/<int:pk>/", htmx_views.edit_todo_title, name="edit-title"),
 ]
 
 urlpatterns = [

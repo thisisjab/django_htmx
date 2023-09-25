@@ -14,7 +14,7 @@
       <input class="form-check-input" type="checkbox" name="is_done" id="" hx-get="{% url 'todo:toggle_is_done' todo.pk %}" hx-target="#todo_item_{{ todo.pk }}" />
       <p class="my-0 mx-3">#{{ todo.order }}</p>
 
-      <input id="todo_{{ todo.pk }}_text" name="todo_title" class="form-control-no-focus my-0 w-100 border-0" style="margin-right: 1rem;" value="{{ todo.title }}" hx-post="{% url 'todo:edit-title' todo.pk %}" hx-target="#todo_{{ todo.pk }}_text" hx-target-400="" hx-trigger="keyup delay:1s" />
+      <input id="todo_{{ todo.pk }}_text" name="todo_title" class="form-control-no-focus my-0 w-100 border-0" style="margin-right: 1rem;" value="{{ todo.title }}" hx-post="{% url 'todo:edit-title' todo.pk %}" hx-target="#todo_{{ todo.pk }}_text" hx-target-400="" hx-trigger="keyup delay:500ms" />
       <div class="vr"></div>
       <span class="badge rounded-pill text-bg-danger" style="cursor: pointer; margin-left: 1rem;" hx-delete="{% url 'todo:delete' todo.pk %}" hx-target="#todoList">X</span>
     {% endif %}

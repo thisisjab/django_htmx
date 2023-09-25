@@ -18,8 +18,11 @@
 
 body {
     font-family: 'Roboto', serif;
+    background-color: #ffffff;
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Merriweather';
 }
+
+/* Color palette used in this project: https://colorhunt.co/palette/004225f5f5dcffb000ffcf9d */
